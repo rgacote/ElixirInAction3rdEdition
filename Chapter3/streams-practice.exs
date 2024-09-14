@@ -37,8 +37,15 @@ defmodule LinesLengths do
         _acc_longest_line(item, acc)
       end)
 
-    %{line_length: line_length, text: text} = result
+    %{line_length: _line_length, text: text} = result
     text
+  end
+
+  def words_per_line!(path) do
+    path
+    |> File.stream!()
+    |> Stream.map(&String.trim_trailing(&1, "\n"))
+    |> Enum.map(&length(String.split(&1)))
   end
 end
 
@@ -46,3 +53,4 @@ path = "./streams-practice.exs"
 IO.inspect(LinesLengths.lines_lengths!(path), label: "Line Lengths")
 IO.inspect(LinesLengths.longest_line_length!(path), label: "Longest line length")
 IO.inspect(LinesLengths.longest_line!(path), label: "Longest line")
+IO.inspect(LinesLengths.words_per_line!(path), label: "Words per line")
