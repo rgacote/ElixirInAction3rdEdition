@@ -1,3 +1,9 @@
+defimpl String.Chars, for: TodoList do
+  def to_string(_) do
+    "#TodoList"
+  end
+end
+
 defmodule TodoList do
   defstruct next_id: 1, entries: %{}
 
@@ -69,6 +75,7 @@ defmodule TodoList.CsvImporter do
       |> IO.inspect(label: "Mapped")
       |> TodoList.new()
       |> IO.inspect(label: "Todo List")
+      |> IO.puts()
   end
 end
 
