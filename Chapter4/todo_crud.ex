@@ -42,3 +42,34 @@ defmodule TodoList do
     |> Enum.filter(fn entry -> entry.date == date end)
   end
 end
+
+defmodule TodoList.CsvImporter do
+  defp to_date([head | tail]) do
+    IO.puts(Date.to_string(Date.from_iso8601!(head)))
+    [Date.from_iso8601!(head) | tail]
+  end
+
+  defp to_map([date | title]) do
+    %{date: date, title: title}
+  end
+
+  # Tried to do too much in the pipeline.
+  # Book sample shows pipeline broken into read_lines and create_entries before piping into TodoList.new()
+  def load_csv(path \\ "./todos.csv") do
+    todo_list =
+      path
+      |> File.stream!()
+      |> IO.inspect(label: "File Stream")
+      |> Stream.map(&String.trim_trailing(&1))
+      |> IO.inspect(label: "Trimmed")
+      |> Stream.map(&String.split(&1, ","))
+      |> Stream.map(&to_date(&1))
+      |> IO.inspect(label: "To date")
+      |> Stream.map(&to_map(&1))
+      |> IO.inspect(label: "Mapped")
+      |> TodoList.new()
+      |> IO.inspect(label: "Todo List")
+  end
+end
+
+TodoList.CsvImporter.load_csv()
