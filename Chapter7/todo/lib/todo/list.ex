@@ -9,6 +9,10 @@ defmodule Todo.List do
     )
   end
 
+  def size(todo_list) do
+    map_size(todo_list.entries)
+  end
+
   def add_entry(todo_list, entry) do
     dbg(todo_list)
     entry = Map.put(entry, :id, todo_list.next_id)
