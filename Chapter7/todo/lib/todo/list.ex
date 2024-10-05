@@ -14,7 +14,6 @@ defmodule Todo.List do
   end
 
   def add_entry(todo_list, entry) do
-    dbg(todo_list)
     entry = Map.put(entry, :id, todo_list.next_id)
     new_entries = Map.put(todo_list.entries, todo_list.next_id, entry)
 
