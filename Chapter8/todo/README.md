@@ -1,21 +1,5 @@
-# Todo
+This is a demo project for Elixir in Action.
 
-**TODO: Add description**
+To be able to compile and run it, you'll need Elixir 1.0.0 and Erlang 17.0. A `git` client should also be installed and available somewhere in the execution path.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `todo` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:todo, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/todo>.
-
+Prior to the first build, you need to call `mix deps.get`. After that, you can build and start the interactive shell by running `iex -S mix` from this project root.
